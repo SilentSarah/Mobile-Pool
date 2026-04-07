@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { evaluate } from "mathjs";
 
 export default function App() {
+  const { width } = useWindowDimensions();
+  const isWide = width > 600;
+
   const [expression, setExpression] = useState("0");
   const [result, setResult] = useState("0");
 
@@ -59,7 +62,7 @@ export default function App() {
 
   return (
     <SafeAreaView className="flex-1 bg-white items-center">
-      <View className="w-full max-w-sm flex-1">
+      <View className={`flex-1 items-center ${isWide ? 'max-w-lg w-full' : 'w-full max-w-sm'}`}>
         {/* AppBar */}
         <View className="h-16 bg-blue-600 justify-center items-center shadow-md rounded-b-xl mb-2">
           <Text className="text-white text-xl font-bold">Calculator</Text>
